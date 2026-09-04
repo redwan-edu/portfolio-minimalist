@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paper stock, ink and brass. Nothing else earns a place. */
+  --color-ivory: #f3f0e9;
+  --color-paper: #fbf9f5;
+  --color-ink: #17140f;
+  --color-graphite: #4b453c;
+  --color-stone: #8c8479;
+  --color-brass: #96794b;
+  --color-bottle: #26382d;
+
+  --animate-hair: hair 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  @keyframes hair {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+@theme inline {
+  --font-display: var(--font-ralgine);
+  --font-sans: var(--font-dubai);
+  --font-wildMagnolia: var(--font-wild-magnolia);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* The site is a deck: one view fills the screen and the page itself never
+     scrolls. A long view scrolls inside its own panel instead. */
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 300;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-brass) 26%, transparent);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-brass);
+    outline-offset: 4px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--color-ink) 16%, transparent);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-brass);
+  }
+}
+
+/* Hairline the whole site rules with — one ink value, one opacity. */
+@utility rule {
+  background-color: color-mix(in oklab, var(--color-ink) 16%, transparent);
+}
+
+@utility rule-border {
+  border-color: color-mix(in oklab, var(--color-ink) 20%, transparent);
+}
+
+/* Small caps meta: the label voice used for eyebrows, rail and status bar. */
+@utility meta {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-size: 0.6875rem;
+  line-height: 1.4;
+}
+
+/* A panel scrolls internally once its content outgrows the view. Chaining is
+   contained: the Shell reads the panel's own scroll edges to decide when a
+   wheel gesture should advance to the next view instead. */
+@utility panel-scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
