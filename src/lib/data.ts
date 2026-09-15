@@ -206,8 +206,8 @@ export const publications: Publication[] = [
     index: "03",
     title:
       "Heart Disease Prediction Using Machine Learning with Ensemble Feature Selection and Hybrid Resampling Technique",
-    venue: "iCONEECT 2026",
-    publisher: "IEEE · Bangladesh Section",
+    venue: "ICEFronT: International Conference on Engineering and Frontier Technologies",
+    publisher: "ACM Publications",
     year: "2026",
     status: "Under review",
     doi: "",
